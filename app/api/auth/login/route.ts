@@ -4,7 +4,7 @@ import dbConnect from '../../../../lib/db'
 import User from '../../../../models/User'
 import { NextResponse } from 'next/server'
 
-console.log('JWT_SECRET:', process.env.JWT_SECRET) // Add this line for debugging
+console.log('JWT_SECRET:', process.env.JWT_SECRET)
 
 export async function POST(req: Request) {
   try {

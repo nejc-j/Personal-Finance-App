@@ -1,10 +1,12 @@
 'use client'
 import { useState } from 'react'
+import { useAuth } from '../../contexts/AuthContext'
 
 const Login = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [message, setMessage] = useState('')
+  const { login } = useAuth()
 
   const handleLogin = async (event: React.FormEvent) => {
     event.preventDefault()
@@ -18,12 +20,9 @@ const Login = () => {
         body: JSON.stringify({ email, password }),
       })
 
-      // Check if response is OK before attempting to parse JSON
       if (response.ok) {
         const data = await response.json()
-        setMessage('Login successful!')
-        // Store the JWT token in local storage or cookies
-        localStorage.setItem('token', data.token)
+        login(data.token)
       } else {
         const errorData = await response.json()
         setMessage(errorData.error)
